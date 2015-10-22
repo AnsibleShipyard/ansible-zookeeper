@@ -1,0 +1,15 @@
+---
+#
+# Test Playbook
+#
+
+- hosts: cluster_hosts
+  vars:
+    install_mode: "cluster"
+  connection: local
+  sudo: yes
+
+  roles:
+    - {role: ../../}
+
+- include: tests.yml
