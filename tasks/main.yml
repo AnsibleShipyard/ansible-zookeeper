@@ -4,3 +4,7 @@
 
 - include: RedHat.yml
   when: ansible_os_family == 'RedHat'
+
+- name: install cleanup cron
+  cron: name="Zookeeper Cleanup" hour=3 minute=0 state=present
+        job="ls -1drt {{ data_dir }}/version-2/* | head --lines=-6 | xargs sudo rm -f"
