@@ -5,11 +5,6 @@ clientPort={{ client_port }}
 initLimit={{ init_limit }}
 syncLimit={{ sync_limit }}
 
-{#
-Also consider:
-server.{{server.id}}={{server.host}}:2888:3888
-#}
-
-{% for server in zookeeper_hosts %}
-server.{{loop.index}}={{server.host}}:2888:3888
+{% for host in zookeeper_hosts %}
+server.{{ hostvars[host].zoo_id }}={{ host }}:2888:3888
 {% endfor %}
