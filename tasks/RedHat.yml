@@ -65,5 +65,5 @@
     - Restart zookeeper
 
 - name: Start zookeeper
-  service: name=zookeeper state=started
+  service: name=zookeeper state=started enabled=yes
   tags: deploy
