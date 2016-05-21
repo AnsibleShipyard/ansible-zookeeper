@@ -11,5 +11,5 @@ server.{{server.id}}={{server.host}}:2888:3888
 #}
 
 {% for server in zookeeper_hosts %}
-server.{{loop.index}}={{server.host}}:2888:3888
+server.{{loop.index}}={{hostvars[server]['ansible_eth0']['ipv4']['address']}}:2888:3888
 {% endfor %}
