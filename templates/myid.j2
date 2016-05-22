@@ -1,1 +1,9 @@
+{% if install_mode == "standalone" %}
 {{ zoo_id }}
+{% elif install_mode == "cluster" %}
+{% for server in play_hosts %}
+{% if server == inventory_hostname %}
+{{loop.index}}
+{% endif %}
+{% endfor %}
+{% endif %}

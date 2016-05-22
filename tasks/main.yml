@@ -1,4 +1,9 @@
 ---
+- name: Check installation valid mode
+  shell: echo {{ install_mode in install_modes_list }}
+  register: command_result
+  failed_when: "'False' in command_result.stdout"
+
 - include: Debian.yml
   when: ansible_os_family == 'Debian'
 

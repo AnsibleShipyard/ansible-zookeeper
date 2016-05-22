@@ -9,13 +9,13 @@ client_port: 2181
 init_limit: 5
 sync_limit: 2
 tick_time: 2000
-zoo_id: 1
 data_dir: /var/lib/zookeeper
 log_dir: /var/log/zookeeper
 zookeeper_dir: /opt/zookeeper-{{zookeeper_version}}
+install_modes_list: ["standalone","cluster"]
 
-# List of dict (i.e. {zookeeper_hosts:[{host:,id:},{host:,id:},...]})
-zookeeper_hosts:
-  - host: "{{inventory_hostname}}" # the machine running 
-    id: 1
-
+# installation mode: only two modes
+#   standalone (default value)
+#   cluster
+install_mode: standalone
+zoo_id: 1
