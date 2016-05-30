@@ -2,14 +2,20 @@ tickTime={{ tick_time }}
 dataDir={{ data_dir }}
 dataLogDir={{ log_dir }}
 clientPort={{ client_port }}
+
+{# More than 1 host ==> Quorum #}
+
+{% if zookeeper_hosts|length > 1 %}
 initLimit={{ init_limit }}
 syncLimit={{ sync_limit }}
+{% endif %}
 
-{#
-Also consider:
-server.{{server.id}}={{server.host}}:2888:3888
-#}
-
+{% if zookeeper_hosts is sequence %}
+{% for server in zookeeper_hosts %}
+server.{{loop.index}}={{server}}:2888:3888
+{% endfor %}
+{% else %} {# otherwise should be a dict / could be tested with the jinja mapping test #}
 {% for server in zookeeper_hosts %}
 server.{{loop.index}}={{server.host}}:2888:3888
 {% endfor %}
+{% endif %}
