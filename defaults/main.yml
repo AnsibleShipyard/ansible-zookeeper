@@ -13,6 +13,7 @@ data_dir: /var/lib/zookeeper
 log_dir: /var/log/zookeeper
 zookeeper_dir: /opt/zookeeper-{{zookeeper_version}}
 
+force_myid: yes
 # List of dict (i.e. {zookeeper_hosts:[{host:,id:},{host:,id:},...]})
 zookeeper_hosts:
   - host: "{{inventory_hostname}}" # the machine running
