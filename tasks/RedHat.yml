@@ -1,4 +1,10 @@
 ---
+- name: Install OS Packages
+  yum: name={{ item }} state=present
+  with_items:
+    - libselinux-python
+
+
 - file: path=/opt/src state=directory
 - file: path={{zookeeper_dir}} state=directory
 
@@ -6,10 +12,6 @@
   get_url: url={{zookeeper_url}} dest=/opt/src/zookeeper-{{zookeeper_version}}.tar.gz
   tags: bootstrap
 
-- name: Install OS Packages
-  yum: name={{ item }} state=present
-  with_items:
-    - libselinux-python
 
 - name: Unpack tarball.
   command: tar zxf /opt/src/zookeeper-{{zookeeper_version}}.tar.gz --strip-components=1 chdir={{zookeeper_dir}} creates={{zookeeper_dir}}/bin
@@ -30,27 +32,6 @@
   file: path={{log_dir}} state=directory recurse=yes owner=zookeeper group=zookeeper
   tags: bootstrap
 
-- name: Check if /etc/init exists
-  stat: path=/etc/init/
-  register: etc_init
-
-- name: Upstart script.
-  template: src=zookeeper.conf.j2 dest=/etc/init/zookeeper.conf
-  when: etc_init.stat.exists == true
-  tags: deploy
-  notify:
-    - Restart zookeeper
-
-- name: Check if systemd exists
-  stat: path=/usr/lib/systemd/system/
-  register: systemd_check
-
-- name: Systemd script.
-  template: src=zookeeper.service.j2 dest=/usr/lib/systemd/system/zookeeper.service
-  when: systemd_check.stat.exists == true
-  tags: deploy
-  notify:
-    - Restart zookeeper
 
 - name: Write myid file.
   template: src=myid.j2 dest={{data_dir}}/myid owner=zookeeper group=zookeeper
@@ -63,6 +44,32 @@
   tags: deploy
   notify:
     - Restart zookeeper
+
+
+
+- name: Check if /etc/init exists
+  stat: path=/etc/init/
+  register: etc_init
+
+- name: Upstart script.
+  template: src=zookeeper.conf.j2 dest=/etc/init/zookeeper.conf
+  when: etc_init.stat.exists == true
+  tags: deploy
+  notify:
+    - Restart zookeeper
+
+
+- name: Check if systemd exists
+  stat: path=/usr/lib/systemd/system/
+  register: systemd_check
+
+- name: Systemd script.
+  template: src=zookeeper.service.j2 dest=/usr/lib/systemd/system/zookeeper.service
+  when: systemd_check.stat.exists == true
+  tags: deploy
+  notify:
+    - Restart zookeeper
+
 
 - name: Start zookeeper
   service: name=zookeeper state=started enabled=yes
