@@ -1,0 +1,43 @@
+---
+
+- file: path=/opt/src state=directory
+- file: path={{zookeeper_dir}} state=directory
+
+- name: Download zookeeper version.
+  get_url: url={{zookeeper_url}} dest=/opt/src/zookeeper-{{zookeeper_version}}.tar.gz
+  tags: bootstrap
+
+
+- name: Unpack tarball.
+  command: tar zxf /opt/src/zookeeper-{{zookeeper_version}}.tar.gz --strip-components=1 chdir={{zookeeper_dir}} creates={{zookeeper_dir}}/bin
+  tags: bootstrap
+
+- group: name=zookeeper system=yes
+- user: name=zookeeper group=zookeeper system=yes
+
+- name: Change ownership on zookeeper directory.
+  file: path={{zookeeper_dir}} state=directory owner=zookeeper group=zookeeper recurse=yes
+  tags: bootstrap
+
+- name: Create zookeeper data folder.
+  file: path={{data_dir}} state=directory recurse=yes owner=zookeeper group=zookeeper
+  tags: bootstrap
+
+- name: Create zookeeper logs folder.
+  file: path={{log_dir}} state=directory recurse=yes owner=zookeeper group=zookeeper
+  tags: bootstrap
+
+
+- name: Write myid file.
+  template: src=myid.j2 dest={{data_dir}}/myid owner=zookeeper group=zookeeper
+  tags: deploy
+  notify:
+    - Restart zookeeper
+
+- name: Configure zookeeper
+  template: src=zoo.cfg.j2 dest={{ zookeeper_dir }}/conf/zoo.cfg owner=zookeeper group=zookeeper
+  tags: deploy
+  notify:
+    - Restart zookeeper
+
+

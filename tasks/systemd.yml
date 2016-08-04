@@ -1,0 +1,10 @@
+---
+- name: Check if systemd exists
+  stat: path=/usr/lib/systemd/system/
+  register: systemd_check
+
+- name: Systemd script.
+  template: src=zookeeper.service.j2 dest=/usr/lib/systemd/system/zookeeper.service
+  when: systemd_check.stat.exists == true
+  notify:
+    - Restart zookeeper
