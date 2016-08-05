@@ -1,0 +1,12 @@
+---
+- include: tarball.yml
+
+- include: upstart.yml
+  tags: deploy
+
+- include: systemd.yml
+  tags: deploy
+
+- name: Start zookeeper
+  service: name=zookeeper state=started enabled=yes
+  tags: deploy

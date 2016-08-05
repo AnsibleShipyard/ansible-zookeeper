@@ -13,5 +13,5 @@ umask 007
 kill timeout 300
 
 script
-    su -c "{{zookeeper_dir}}/bin/zkServer.sh start-foreground > /var/log/zookeeper/init-zookeeper.log" zookeeper
+    exec sudo -u zookeeper -g zookeeper {{zookeeper_dir}}/bin/zkServer.sh start-foreground > /var/log/zookeeper/init-zookeeper.log 2>&1
 end script

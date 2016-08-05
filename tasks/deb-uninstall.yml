@@ -1,0 +1,9 @@
+---
+- name: Start zookeeper service
+  service: name=zookeeper state=stopped enabled=no
+
+- name: Apt install required system packages.
+  apt: pkg={{item}} state=absent
+  with_items:
+    - zookeeper
+    - zookeeperd
