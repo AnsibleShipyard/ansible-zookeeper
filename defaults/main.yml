@@ -5,7 +5,6 @@ zookeeper_version: 3.4.6
 zookeeper_url: http://www.us.apache.org/dist/zookeeper/zookeeper-{{zookeeper_version}}/zookeeper-{{zookeeper_version}}.tar.gz
 
 zookeeper_debian_apt_install: false
-zookeeper_debian_apt_uninstall: false
 apt_cache_timeout: 3600
 
 client_port: 2181

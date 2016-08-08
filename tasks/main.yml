@@ -1,6 +1,4 @@
 ---
-- include: deb-uninstall.yml
-  when: ansible_os_family == 'Debian' and zookeeper_debian_apt_uninstall
 
 - include: Debian.yml
   when: ansible_os_family == 'Debian' and zookeeper_debian_apt_install
