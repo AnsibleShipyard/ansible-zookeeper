@@ -2,9 +2,11 @@
 - include: tarball.yml
 
 - include: upstart.yml
+  when: not zookeeper_debian_systemd_enabled
   tags: deploy
 
 - include: systemd.yml
+  when: zookeeper_debian_systemd_enabled
   tags: deploy
 
 - name: Start zookeeper
