@@ -1,13 +1,16 @@
 ---
-- file: path=/opt/src state=directory
-- file: path={{zookeeper_dir}} state=directory
+- name: "Ensure the tarball dir exists at {{zookeeper_tarball_dir}}"
+  file: path={{zookeeper_tarball_dir}} state=directory
+
+- name: "Ensure the zookeeper dir exists at {{zookeeper_dir}}"
+  file: path={{zookeeper_dir}} state=directory
 
 - name: Download zookeeper version.
-  get_url: url={{zookeeper_url}} dest=/opt/src/zookeeper-{{zookeeper_version}}.tar.gz
+  get_url: url={{zookeeper_url}} dest={{zookeeper_tarball_dir}}/zookeeper-{{zookeeper_version}}.tar.gz
   tags: bootstrap
 
 - name: Unpack tarball.
-  command: tar zxf /opt/src/zookeeper-{{zookeeper_version}}.tar.gz --strip-components=1 chdir={{zookeeper_dir}} creates={{zookeeper_dir}}/bin
+  command: tar zxf {{zookeeper_tarball_dir}}/zookeeper-{{zookeeper_version}}.tar.gz --strip-components=1 chdir={{zookeeper_dir}} creates={{zookeeper_dir}}/bin
   tags: bootstrap
 
 - group: name=zookeeper system=yes
