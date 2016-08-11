@@ -42,3 +42,4 @@
   tags: deploy
   notify:
     - Restart zookeeper
+  when: zookeeper_env is defined and zookeeper_env|length > 0
