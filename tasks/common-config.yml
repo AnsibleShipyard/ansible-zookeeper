@@ -1,9 +1,10 @@
 ---
-- name: Write myid file.
-  template: src=myid.j2 dest={{data_dir}}/myid owner=zookeeper group=zookeeper
+- name: Configure zookeeper-env.sh
+  template: src=zookeeper-env.sh.j2 dest={{ zookeeper_dir }}/conf/zookeeper-env.sh owner=zookeeper group=zookeeper
   tags: deploy
   notify:
     - Restart zookeeper
+  when: zookeeper_env is defined and zookeeper_env|length > 0
 
 - name: Start zookeeper service
   service: name=zookeeper state=started enabled=yes
