@@ -9,6 +9,7 @@ zookeeper_url: http://www.us.apache.org/dist/zookeeper/zookeeper-{{zookeeper_ver
 zookeeper_debian_systemd_enabled: "{{ ansible_distribution_version|version_compare(15.04, '>=') }}"
 zookeeper_debian_apt_install: false
 apt_cache_timeout: 3600
+zookeeper_register_path_env: false
 
 client_port: 2181
 init_limit: 5

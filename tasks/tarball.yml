@@ -39,3 +39,7 @@
   tags: deploy
   notify:
     - Restart zookeeper
+
+- name: Add zookeeper's bin dir to the PATH
+  copy: content="export PATH=$PATH:{{zookeeper_dir}}/bin" dest="/etc/profile.d/zookeeper_path.sh" mode=755
+  when: zookeeper_register_path_env
