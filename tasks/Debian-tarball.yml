@@ -8,7 +8,3 @@
 - include: systemd.yml
   when: zookeeper_debian_systemd_enabled
   tags: deploy
-
-- name: Start zookeeper
-  service: name=zookeeper state=started enabled=yes
-  tags: deploy
