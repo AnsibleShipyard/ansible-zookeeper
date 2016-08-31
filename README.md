@@ -74,6 +74,25 @@ Example Playbook
     - role: AnsibleShipyard.ansible-zookeeper
 ```
 
+Cluster Example
+----------------
+
+```yaml
+- name: Zookeeper cluster setup
+  hosts: zookeepers
+  sudo: yes
+  roles:
+    - role: AnsibleShipyard.ansible-zookeeper
+      zookeeper_hosts: "{{groups['zookeepers']}}"
+```
+
+Assuming ```zookeepers``` is a [hosts group](http://docs.ansible.com/ansible/intro_inventory.html#group-variables) defined in inventory file.
+
+```inventory
+[zookeepers]
+server[1:3]
+```
+
 See this sample [playbook](https://github.com/AnsibleShipyard/ansible-galaxy-roles/blob/master/playbook.yml)
 which shows how to use this playbook as well as others. It is part of [ansible-galaxy-roles](https://github.com/AnsibleShipyard/ansible-galaxy-roles) and
 serves as a curation (and thus an example) of all our ansible playbooks.
