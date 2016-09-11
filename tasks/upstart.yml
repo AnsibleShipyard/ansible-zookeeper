@@ -5,6 +5,8 @@
 
 - name: Upstart script.
   template: src=zookeeper.conf.j2 dest=/etc/init/zookeeper.conf
-  when: etc_init.stat.exists == true
+  when:
+    - etc_init.stat.exists == true
+    - ansible_service_mgr != 'systemd'
   notify:
     - Restart zookeeper
