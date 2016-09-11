@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  connection: local
+  remote_user: root
+  roles:
+    - role: role_under_test
