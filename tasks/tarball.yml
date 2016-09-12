@@ -17,16 +17,15 @@
 - user: name=zookeeper group=zookeeper system=yes
 
 - name: Change ownership on zookeeper directory.
-  file: path={{zookeeper_dir}} state=directory owner=zookeeper group=zookeeper recurse=yes
+  file: path={{zookeeper_dir}} state=directory owner=zookeeper group=zookeeper
   tags: bootstrap
 
-- name: Create zookeeper data folder.
-  file: path={{data_dir}} state=directory recurse=yes owner=zookeeper group=zookeeper
+- name: "Create zookeeper {{item}} directory."
+  file: path={{item}} state=directory owner=zookeeper group=zookeeper
   tags: bootstrap
-
-- name: Create zookeeper logs folder.
-  file: path={{log_dir}} state=directory recurse=yes owner=zookeeper group=zookeeper
-  tags: bootstrap
+  with_items:
+    - "{{data_dir}}"
+    - "{{log_dir}}"
 
 - name: Write myid file.
   template: src=myid.j2 dest={{data_dir}}/myid owner=zookeeper group=zookeeper
