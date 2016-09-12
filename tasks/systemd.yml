@@ -1,6 +1,6 @@
 ---
 - name: Systemd script.
-  template: src=zookeeper.service.j2 dest=/usr/lib/systemd/system/zookeeper.service
+  template: src=zookeeper.service.j2 dest=/lib/systemd/system/zookeeper.service
   when: ansible_service_mgr == 'systemd'
   notify:
     - Restart zookeeper
