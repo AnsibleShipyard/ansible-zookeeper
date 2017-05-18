@@ -9,4 +9,12 @@
 - include: RedHat.yml
   when: ansible_os_family == 'RedHat'
 
+- name: remove upstart file for zookeeper to avoid conflicts in case of docker or something which dont support upstart
+  shell: rm -f /etc/init/zookeeper.conf || true
+  args:
+    removes: /etc/init/zookeeper.conf
+  when: no_upstart is defined
+
 - include: common-config.yml
+
+- meta: flush_handlers

@@ -2,9 +2,13 @@
 {% if server.host is defined %}
 {% if server.host == inventory_hostname %}
 {{ server.id }}
+{% elif server.host in ansible_all_ipv4_addresses %}
+{{ server.id }}
+{% elif server.ip is defined and server.ip in ansible_all_ipv4_addresses %}
+{{ server.id }}
 {% endif %}
 {% else %}
-{% if server == inventory_hostname %}
+{% if server == inventory_hostname or server in ansible_all_ipv4_addresses %}
 {{ loop.index }}
 {% endif %}
 {% endif %}

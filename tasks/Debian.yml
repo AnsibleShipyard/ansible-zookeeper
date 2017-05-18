@@ -8,6 +8,7 @@
 - name: Update apt cache
   apt: update_cache=yes cache_valid_time={{apt_cache_timeout}}
   tags: bootstrap
+  when: update_apt_cache is defined
 
 - name: Apt install required system packages.
   apt: pkg={{item}} state=installed
