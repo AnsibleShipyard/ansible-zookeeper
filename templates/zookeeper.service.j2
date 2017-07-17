@@ -2,6 +2,8 @@
 
 [Unit]
 Description=ZooKeeper
+After=network.target
+Wants=network.target
 
 [Service]
 Type=simple
