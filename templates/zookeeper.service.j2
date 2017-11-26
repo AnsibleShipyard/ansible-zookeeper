@@ -8,6 +8,8 @@ Type=simple
 User=zookeeper
 Group=zookeeper
 ExecStart={{zookeeper_dir}}/bin/zkServer.sh start-foreground
+Restart=always
+RestartSec=3
 
 TimeoutSec=300
 
