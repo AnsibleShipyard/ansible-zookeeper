@@ -85,7 +85,7 @@
       failed_when: status.rc != 0
 
     # Expecting zoo.cfg to include serve definition with custom IP
-    - shell: "grep 'server.2=192.168.0.1:2888:3888' {{ zookeeper_dir }}/conf/zoo.cfg"
+    - shell: "grep 'server.2=192.168.0.1:{{ zookeeper_cluster_ports }}' {{ zookeeper_dir }}/conf/zoo.cfg"
       register: status
       failed_when: status.rc != 0
 

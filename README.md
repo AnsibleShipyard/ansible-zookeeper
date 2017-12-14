@@ -52,6 +52,7 @@ sync_limit: 2
 tick_time: 2000
 zookeeper_autopurge_purgeInterval: 0
 zookeeper_autopurge_snapRetainCount: 10
+zookeeper_cluster_ports: "2888:3888"
 
 data_dir: /var/lib/zookeeper
 log_dir: /var/log/zookeeper
