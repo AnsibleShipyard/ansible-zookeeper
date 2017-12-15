@@ -78,6 +78,7 @@
   vars:
     zookeeper_version: 3.4.11
     zookeeper_dir: /opt/zookeeper-{{zookeeper_version}}
+    zookeeper_cluster_ports: "2888:3888"
   tasks:
     # Expecting myid to be 2 as defined in zookeeper_hosts variable
     - shell: "grep 2 /var/lib/zookeeper/myid"
