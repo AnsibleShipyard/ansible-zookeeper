@@ -1,12 +1,12 @@
 ---
 
-- include: Debian.yml
+- include_tasks: Debian.yml
   when: ansible_os_family == 'Debian' and zookeeper_debian_apt_install
 
-- include: Debian-tarball.yml
+- include_tasks: Debian-tarball.yml
   when: ansible_os_family == 'Debian' and not zookeeper_debian_apt_install
 
-- include: RedHat.yml
+- include_tasks: RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- include: common-config.yml
+- include_tasks: common-config.yml

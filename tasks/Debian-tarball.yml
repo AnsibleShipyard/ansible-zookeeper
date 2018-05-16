@@ -1,10 +1,10 @@
 ---
-- include: tarball.yml
+- include_tasks: tarball.yml
 
-- include: upstart.yml
+- include_tasks: upstart.yml
   when: not zookeeper_debian_systemd_enabled
   tags: deploy
 
-- include: systemd.yml
+- include_tasks: systemd.yml
   when: zookeeper_debian_systemd_enabled
   tags: deploy

@@ -65,7 +65,7 @@
   remote_user: root
   roles:
     - role: role_under_test
-      zookeeper_version: 3.4.11
+      zookeeper_version: 3.4.12
       zookeeper_dir: /opt/zookeeper-{{zookeeper_version}}
       zookeeper_hosts:
         - host: "{{zookeeper_hosts_hostname}}" # the machine running
@@ -76,7 +76,7 @@
   connection: local
   remote_user: root
   vars:
-    zookeeper_version: 3.4.11
+    zookeeper_version: 3.4.12
     zookeeper_dir: /opt/zookeeper-{{zookeeper_version}}
     zookeeper_cluster_ports: "2888:3888"
   tasks:
