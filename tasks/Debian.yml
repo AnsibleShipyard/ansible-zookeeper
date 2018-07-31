@@ -1,7 +1,7 @@
 ---
 - name: Add optional custom apt repositories (for additional zookeeper versions)
   apt_repository: repo={{item.repository_url}} state=present
-  when: "{{ ansible_distribution_version|version_compare(item.distro_version, item.version_comparator|default('=')) }}"
+  when: "{{ ansible_distribution_version is version_compare(item.distro_version, item.version_comparator|default('=')) }}"
   with_items:
     - "{{ zookeeper_debian_apt_repositories }}"
 
