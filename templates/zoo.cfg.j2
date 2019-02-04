@@ -2,6 +2,9 @@ tickTime={{ tick_time }}
 dataDir={{ data_dir }}
 dataLogDir={{ log_dir }}
 clientPort={{ client_port }}
+{% if client_port_address is defined %}
+clientPortAddress={{ client_port_address }}
+{% endif %}
 initLimit={{ init_limit }}
 syncLimit={{ sync_limit }}
 maxClientCnxns={{ zookeeper_max_client_connections }}
