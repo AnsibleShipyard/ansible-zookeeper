@@ -10,6 +10,10 @@ autopurge.purgeInterval={{ zookeeper_autopurge_purgeInterval }}
 autopurge.snapRetainCount={{ zookeeper_autopurge_snapRetainCount }}
 {% endif %}
 
+preAllocSize={{ pre_alloc_size }}
+snapCount={{ snap_count }}
+leaderServes={{ leader_serves }}
+
 {% for server in zookeeper_hosts %}
 {% if server.host is defined %}
 {% if server.ip is defined %}
