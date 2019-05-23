@@ -21,6 +21,11 @@ zookeeper_autopurge_purgeInterval: 0
 zookeeper_autopurge_snapRetainCount: 10
 zookeeper_cluster_ports: "2888:3888"
 zookeeper_max_client_connections: 60
+pre_alloc_size: 64000
+snap_count: 100000
+leader_serves: yes
+
+
 
 data_dir: /var/lib/zookeeper
 log_dir: /var/log/zookeeper
