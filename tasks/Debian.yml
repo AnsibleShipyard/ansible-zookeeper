@@ -17,7 +17,7 @@
     - zookeeperd
 
 - name: Overwrite myid file.
-  template: src=myid.j2 dest={{zookeeper_conf_dir}}/conf/myid force="{{ zookeeper_force_myid }}"
+  template: src=myid.j2 dest={{data_dir}}/myid force="{{ zookeeper_force_myid }}"
   tags: deploy
   notify:
     - Restart zookeeper
