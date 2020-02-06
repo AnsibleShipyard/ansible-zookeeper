@@ -10,7 +10,7 @@
   tags: bootstrap
 
 - name: Apt install required system packages.
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=present
   tags: bootstrap
   with_items:
     - zookeeper
