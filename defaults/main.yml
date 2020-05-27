@@ -4,8 +4,8 @@ zookeeper_url: http://www.us.apache.org/dist/zookeeper/zookeeper-{{zookeeper_ver
 
 # Flag that selects if systemd or upstart will be used for the init service:
 # Note: by default Ubuntu 15.04 and later use systemd (but support switch to upstart)
-_ubuntu_1504: "{{ ansible_distribution == 'Ubuntu' and ansible_distribution_version|version_compare(15.04, '>=') }}"
-_debian_8: "{{ ansible_distribution == 'Debian' and ansible_distribution_version|version_compare(8.0, '>=') }}"
+_ubuntu_1504: "{{ ansible_distribution == 'Ubuntu' and ansible_distribution_version is version(15.04, '>=') }}"
+_debian_8: "{{ ansible_distribution == 'Debian' and ansible_distribution_version is version(8.0, '>=') }}"
 zookeeper_debian_systemd_enabled: "{{ _ubuntu_1504 or _debian_8 }}"
 
 zookeeper_debian_apt_install: false
